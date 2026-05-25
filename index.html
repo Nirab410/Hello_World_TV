@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World TV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Nunito:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <style>
+      :root {
+        --bg: #06080f;
+        --surface-1: #0d1120;
+        --surface-2: #121829;
+        --surface-3: #1a2236;
+        --text: #eef2ff;
+        --text-2: #8b93b0;
+        --text-3: #4e5875;
+        --accent: #4f8ef7;
+        --accent-2: #8b5cf6;
+        --accent-glow: rgba(79, 142, 247, 0.22);
+        --green: #10d98a;
+        --green-dim: rgba(16, 217, 138, 0.14);
+        --border: rgba(255, 255, 255, 0.07);
+        --border-hover: rgba(79, 142, 247, 0.4);
+        --font-head: "Poppins", sans-serif;
+        --font-body: "Nunito", sans-serif;
+        --radius: 18px;
+        --sidebar-w: clamp(320px, 34vw, 400px);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── NOISE OVERLAY ─────────────────────────────── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+        background-size: 180px;
+        opacity: 0.5;
+      }
+
+      /* ── AMBIENT GLOWS ─────────────────────────────── */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 70% 42% at 12% 0%,
+            rgba(79, 142, 247, 0.13) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 36% at 88% 2%,
+            rgba(139, 92, 246, 0.12) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 40% 30% at 50% 100%,
+            rgba(16, 217, 138, 0.07) 0%,
+            transparent 60%
+          );
+      }
+
+      /* ── HEADER ────────────────────────────────────── */
+      header {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 28px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(13, 17, 32, 0.75);
+        backdrop-filter: blur(20px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 28px rgba(79, 142, 247, 0.35);
+        flex-shrink: 0;
+      }
+
+      .brand-icon svg {
+        width: 22px;
+        height: 22px;
+        fill: #fff;
+      }
+
+      .brand-text h1 {
+        font-family: var(--font-head);
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+
+      .brand-text span {
+        font-size: 12px;
+        color: var(--text-2);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .live-badge {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid rgba(16, 217, 138, 0.3);
+        background: var(--green-dim);
+        color: var(--green);
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .live-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulse 1.6s ease-in-out infinite;
+        box-shadow: 0 0 8px var(--green);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.55;
+          transform: scale(0.8);
+        }
+      }
+
+      /* ── MAIN LAYOUT ───────────────────────────────── */
+      .workspace {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        gap: 0;
+        min-height: calc(100vh - 73px - 80px);
+      }
+
+      /* ── LEFT: PLAYER ZONE ─────────────────────────── */
+      .player-zone {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 30px 24px 30px 36px;
+        gap: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .player-zone::-webkit-scrollbar {
+        display: none;
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #000;
+        border: 1px solid var(--border);
+        box-shadow:
+          0 32px 80px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        background: #000;
+      }
+
+      .video-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .video-placeholder.hidden {
+        opacity: 0;
+      }
+
+      .placeholder-icon {
+        width: 72px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        display: grid;
+        place-items: center;
+      }
+
+      .placeholder-icon svg {
+        width: 30px;
+        height: 30px;
+        fill: var(--text-2);
+      }
+
+      .video-placeholder p {
+        color: var(--text-2);
+        font-size: 15px;
+      }
+
+      /* Now-Playing info bar */
+      .now-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 22px;
+        border-radius: var(--radius);
+        background: var(--surface-1);
+        border: 1px solid var(--border);
+      }
+
+      .now-bar-indicator {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+
+      .now-bar-indicator svg {
+        width: 17px;
+        height: 17px;
+        fill: #fff;
+      }
+
+      .now-bar-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .now-bar-label {
+        font-size: 11px;
+        color: var(--text-3);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 600;
+      }
+
+      #nowPlaying {
+        font-family: var(--font-head);
+        font-size: 22px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2;
+      }
+
+      #statusText {
+        font-size: 13px;
+        color: var(--text-2);
+      }
+
+      /* ── RIGHT: SIDEBAR ────────────────────────────── */
+      .sidebar {
+        width: var(--sidebar-w);
+        min-width: 0;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid var(--border);
+        background: rgba(13, 17, 32, 0.6);
+        backdrop-filter: blur(14px);
+        position: sticky;
+        top: 0;
+        height: calc(100vh - 73px - 80px);
+        overflow: hidden;
+      }
+
+      .sidebar-head {
+        padding: 22px 20px 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .sidebar-title {
+        font-family: var(--font-head);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .channel-count {
+        font-family: var(--font-body);
+        font-size: 11px;
+        background: var(--surface-3);
+        color: var(--text-2);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-weight: 500;
+      }
+
+      .search-box {
+        position: relative;
+      }
+
+      .search-box svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        fill: var(--text-3);
+        pointer-events: none;
+      }
+
+      #searchInput {
+        width: 100%;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 12px 14px 12px 38px;
+        border-radius: 12px;
+        font-family: var(--font-body);
+        font-size: 14px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      #searchInput::placeholder {
+        color: var(--text-3);
+      }
+      #searchInput:focus {
+        border-color: var(--border-hover);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+      }
+
+      /* categories */
+      .cat-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        overflow-x: hidden;
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .cat-btn {
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-2);
+        padding: 7px 13px;
+        border-radius: 999px;
+        font-family: var(--font-body);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: all 0.18s;
+      }
+
+      .cat-btn:hover {
+        border-color: var(--border-hover);
+        color: var(--text);
+        background: rgba(79, 142, 247, 0.1);
+      }
+
+      .cat-btn.active {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(79, 142, 247, 0.3);
+      }
+
+      /* channel list */
+      .channel-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .channel-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .channel-list::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .channel-list::-webkit-scrollbar-thumb {
+        background: var(--surface-3);
+        border-radius: 99px;
+      }
+
+      .channel-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 12px;
+        border-radius: 14px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        background: transparent;
+      }
+
+      .channel-item:hover {
+        background: var(--surface-2);
+        border-color: var(--border);
+      }
+
+      .channel-item.active {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 142, 247, 0.12),
+          rgba(139, 92, 246, 0.1)
+        );
+        border-color: rgba(79, 142, 247, 0.35);
+      }
+
+      .channel-item.active .ch-name {
+        color: var(--accent);
+      }
+
+      .ch-logo {
+        width: 64px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--surface-3);
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        padding: 6px;
+      }
+
+      .ch-logo img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      .ch-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .ch-name {
+        font-family: var(--font-head);
+        font-size: 15px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.25;
+        color: var(--text);
+      }
+
+      .ch-cat {
+        font-size: 13px;
+        color: var(--text-3);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      .ch-play-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        opacity: 0;
+        transition:
+          opacity 0.15s,
+          background 0.15s;
+      }
+
+      .channel-item:hover .ch-play-btn,
+      .channel-item.active .ch-play-btn {
+        opacity: 1;
+      }
+
+      .channel-item.active .ch-play-btn {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      }
+
+      .ch-play-btn svg {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+      }
+
+      .empty-msg {
+        text-align: center;
+        color: var(--text-3);
+        font-size: 13px;
+        padding: 30px 10px;
+        border: 1px dashed var(--border);
+        border-radius: 14px;
+      }
+
+      /* ── FOOTER ────────────────────────────────────── */
+      footer {
+        position: relative;
+        z-index: 10;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        border-top: 1px solid var(--border);
+        background: rgba(13, 17, 32, 0.85);
+        backdrop-filter: blur(20px);
+        gap: 16px;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-logo {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        display: grid;
+        place-items: center;
+      }
+
+      .footer-logo svg {
+        width: 15px;
+        height: 15px;
+        fill: #fff;
+      }
+
+      .footer-copy {
+        font-size: 13px;
+        color: var(--text-3);
+        line-height: 1.4;
+      }
+
+      .footer-copy strong {
+        color: var(--text-2);
+        font-weight: 600;
+      }
+
+      .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--surface-1);
+        color: var(--text-2);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.18s;
+      }
+
+      .footer-link:hover {
+        border-color: var(--border-hover);
+        color: var(--text);
+        background: var(--surface-2);
+        box-shadow: 0 4px 18px rgba(79, 142, 247, 0.12);
+      }
+
+      .footer-link svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+        flex-shrink: 0;
+      }
+
+      /* ── RESPONSIVE ───────────────────────────────── */
+      @media (max-width: 1000px) {
+        :root {
+          --sidebar-w: 340px;
+        }
+
+        .player-zone {
+          padding: 20px 16px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .workspace {
+          flex-direction: column;
+          height: auto;
+          overflow: visible;
+        }
+
+        .player-zone {
+          padding: 14px;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: relative;
+          height: auto;
+          border-left: none;
+          border-top: 1px solid var(--border);
+          max-height: none;
+        }
+
+        .channel-list {
+          max-height: 520px;
+        }
+
+        footer {
+          flex-wrap: wrap;
+          height: auto;
+          padding: 14px 18px;
+          gap: 12px;
+        }
+
+        .footer-links {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header {
+          padding: 14px 16px;
+        }
+
+        .brand-text h1 {
+          font-size: 19px;
+        }
+
+        .live-badge {
+          padding: 6px 10px;
+          font-size: 11px;
+        }
+
+        .now-bar {
+          padding: 14px;
+          gap: 12px;
+        }
+
+        #nowPlaying {
+          font-size: 18px;
+        }
+
+        .channel-item {
+          padding: 12px 10px;
+          gap: 10px;
+        }
+
+        .ch-logo {
+          width: 56px;
+          height: 42px;
+          border-radius: 10px;
+          padding: 5px;
+        }
+
+        .ch-play-btn {
+          display: none;
+        }
+
+        .footer-link {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+            />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Hello World</h1>
+          <span>Live Television</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          Live TV
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <div class="workspace">
+      <!-- LEFT: VIDEO PLAYER -->
+      <div class="player-zone">
+        <div class="video-wrapper">
+          <video id="video" controls playsinline></video>
+          <div class="video-placeholder" id="videoPlaceholder">
+            <div class="placeholder-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+            </div>
+            <p>Select a channel to start watching</p>
+          </div>
+        </div>
+
+        <div class="now-bar">
+          <div class="now-bar-indicator">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+              />
+            </svg>
+          </div>
+          <div class="now-bar-text">
+            <div class="now-bar-label">Now Playing</div>
+            <div id="nowPlaying">No channel selected</div>
+          </div>
+          <div
+            id="statusText"
+            style="font-size: 13px; color: var(--text-3); flex-shrink: 0"
+          >
+            —
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-head">
+          <div class="sidebar-title">
+            Channels
+            <span class="channel-count" id="channelCount">0</span>
+          </div>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              />
+            </svg>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search channels…"
+            />
+          </div>
+        </div>
+
+        <div class="cat-strip" id="categoryBar"></div>
+
+        <div class="channel-list" id="channelList"></div>
+      </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+            />
+          </svg>
+        </div>
+        <div class="footer-copy">
+          &copy; 2025 <strong>Hello World TV</strong> — All rights reserved
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
+          <!-- Facebook icon -->
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+            />
+          </svg>
+          Facebook
+        </a>
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener"
+          class="footer-link"
+        >
+          <!-- GitHub icon -->
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"
+            />
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
