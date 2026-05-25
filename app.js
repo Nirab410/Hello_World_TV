@@ -258,7 +258,7 @@ const channels = [
     name: "A Sports HD",
     category: "sports",
     logo: "",
-    url: "https://tvsen6.aynaott.com/asports/tracks-v1a1/mono.ts.m3u8",
+    url: "http://redforce.live:8082/A.SPORTS.HD/tracks-v1a1/mono.m3u8?token=e763124b1f76fdff03b047b3d343c9c171c57f73-409a6675214f414616aa2444e828cc57-1751358302-1751347502",
   },
   {
     name: "Tom & Jerry TV",
@@ -283,6 +283,24 @@ const channels = [
     category: "Documentry",
     logo: "https://i.ibb.co.com/JRTy1vrd/download-1.png",
     url: "http://103.157.248.140:8000/play/a010/index.m3u8",
+  },
+  {
+    name: "Hungama TV",
+    category: "Cartoon",
+    logo: "https://i.ibb.co.com/S4SvVpsn/png-clipart-hungama-tv-television-channel-utv-software-communications-logo-hungama-digital-media-ent.png",
+    url: "http://redforce.live:8082/HUNGAMA/tracks-v1a1/mono.m3u8?token=952211444805dfbf5935b0c02012d25209850b18-75b5cc50bde13abe3b5957cd841b0da6-1751358022-1751347222",
+  },
+  {
+    name: "Cartoon Network",
+    category: "Cartoon",
+    logo: "https://i.ibb.co.com/KpzQsWyw/images.png",
+    url: "https://tvsen5.aynaott.com/cartoonnetwork/tracks-v1a1/mono.ts.m3u8?e=1779508656",
+  },
+  {
+    name: "Star Sports Select 1 HD",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/Z1VsHxzB/Star-sports-select-1.webp",
+    url: "http://redforce.live:8082/STAR.SPORTS-SEL1.HD/tracks-v1a1/mono.m3u8?token=e492f1c750863956bf5949013c75c720a9a2f5f5-c021880c7576263a4757410839452d81-1751358921-1751348121",
   },
 ];
 
