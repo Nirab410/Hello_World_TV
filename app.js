@@ -264,8 +264,9 @@ const channels = [
     name: "Willow TV",
     category: "Sports",
     logo: "https://i.ibb.co.com/mjC8LPM/Willow-is-on-DIRECTV.png",
-    url: "https://streams2.sofast.tv/sofast3/v1/0197e8dc0d161eb4611d3421466de9/0197e8dc55c71ebd416a57de38aff/686CC86100007B696871-p0_tmpl3500k_3500k-1779774438011.ts",
+    url: "https://tvsen5.aynaott.com/willowhd/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
+
   {
     name: "ASports HD",
     category: "Sports",
