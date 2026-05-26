@@ -270,10 +270,10 @@ const channels = [
     name: "ASports HD",
     category: "Sports",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=A+Sports",
-    url: "https://edge2.roarzone.net:8447/roarzone/edge5/a-sports/tracks-v1a1/mono.m3u8?token=483227e09edc208b3920f9fbbac15723de2ac560-83c085fb01f4bb831776337d3eda8911-1779775247-1779764447",
+    url: "https://tvsen5.aynaott.com/willowhd/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
   {
-    name: "Sports Grid FIFA",
+    name: "Sports Grid",
     category: "Sports",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Sports+Grid",
     url: "https://tvsen6.aynaott.com/SportsGrid/tracks-v1a1/mono.ts.m3u8?e=1779508653",
