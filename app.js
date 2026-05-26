@@ -264,13 +264,13 @@ const channels = [
     name: "Willow TV",
     category: "Sports",
     logo: "https://i.ibb.co.com/mjC8LPM/Willow-is-on-DIRECTV.png",
-    url: "https://edge2.roarzone.net:8447/roarzone/edge5/willow-tv/tracks-v1a1/2026/05/26/03/06/45-05000.ts?token=d4bd232d26cb8a7f1d6c636cb8ea5abef910487a-1ec415dfcec5cd61f111e2cdf3e68e2e-1779775211-1779764411",
+    url: "https://streams2.sofast.tv/sofast3/v1/0197e8dc0d161eb4611d3421466de9/0197e8dc55c71ebd416a57de38aff/686CC86100007B696871-p0_tmpl3500k_3500k-1779774438011.ts",
   },
   {
     name: "ASports HD",
     category: "Sports",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=A+Sports",
-    url: "https://streams2.sofast.tv/sofast3/v1/0197e8dc0d161eb4611d3421466de9/0197e8dc55c71ebd416a57de38aff/686CC86100007B696871-p0_tmpl3500k_3500k-1779774438011.ts",
+    url: "https://tvsen6.aynaott.com/asports/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
   {
     name: "Sports Grid",
