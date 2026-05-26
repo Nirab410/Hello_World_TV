@@ -9,12 +9,6 @@ const channels = [
     url: "https://37b4c228.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWZyX0ZJRkFQbHVzRnJlbmNoX0hMUw/6f5437c5-e015-4754-8476-c8c6d27d3a55/1.m3u8",
   },
   {
-    name: "Star Sports 1 HD",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "http://103.157.248.140:8000/play/a01m/index.m3u8",
-  },
-  {
     name: "BTV",
     category: "bangladeshi",
     logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
@@ -279,6 +273,30 @@ const channels = [
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Sports+Grid",
     url: "https://tvsen6.aynaott.com/SportsGrid/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
+  {
+    name: "Star Sports 1 HD",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
+    url: "https://tvsen7.aynaott.com/sspts1/tracks-v1a1/mono.ts.m3u8",
+  },
+  {
+    name: "Gopal Var TV",
+    category: "Cartoon",
+    logo: "https://i.ibb.co.com/5xSF5mzh/Gopal-Bhar-animated-TV-series-title-card.jpg",
+    url: "https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts.m3u8",
+  },
+  {
+    name: "Star Jalsha",
+    category: "Entertainment",
+    logo: "https://i.ibb.co.com/r1MLjgh/Star-Jalsha-logo-2023.png",
+    url: "https://tyr.zibobdixserver.top/hls/StarJalshaHD.m3u8",
+  },
+  {
+    name: "Islamic TV",
+    category: "Islamic",
+    logo: "https://i.ibb.co.com/hRYXS3nb/Islamic-TV-New-Logo.png",
+    url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/1724-audio_113542_eng=113200-video=2202800.m3u8",
+  },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -506,3 +524,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Hello World TV loaded:", channels.length, "channels");
 });
+async function loadVisitorStats() {
+  const todayEl = document.getElementById("todayVisitors");
+  const totalEl = document.getElementById("totalVisitors");
+
+  if (!todayEl || !totalEl) return;
+
+  const KEY = "hello_world_tv_last_counted_at";
+  const ONE_DAY = 24 * 60 * 60 * 1000;
+
+  const lastCounted = Number(localStorage.getItem(KEY) || 0);
+  const now = Date.now();
+  const shouldCount = !lastCounted || now - lastCounted >= ONE_DAY;
+
+  try {
+    const res = await fetch(
+      `/.netlify/functions/view-counter?count=${shouldCount ? "1" : "0"}`,
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.details || "Counter error");
+    }
+
+    if (shouldCount) {
+      localStorage.setItem(KEY, String(now));
+    }
+
+    todayEl.textContent = Number(data.today || 0).toLocaleString();
+    totalEl.textContent = Number(data.total || 0).toLocaleString();
+  } catch (err) {
+    console.error("Visitor counter error:", err);
+    todayEl.textContent = "N/A";
+    totalEl.textContent = "N/A";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadVisitorStats);

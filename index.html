@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello World TV</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Nunito:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <style>
@@ -49,7 +51,6 @@
         overflow-x: hidden;
       }
 
-      /* ── NOISE OVERLAY ─────────────────────────────── */
       body::before {
         content: "";
         position: fixed;
@@ -61,7 +62,6 @@
         opacity: 0.5;
       }
 
-      /* ── AMBIENT GLOWS ─────────────────────────────── */
       body::after {
         content: "";
         position: fixed;
@@ -86,7 +86,6 @@
           );
       }
 
-      /* ── HEADER ────────────────────────────────────── */
       header {
         position: relative;
         z-index: 10;
@@ -144,6 +143,53 @@
         gap: 14px;
       }
 
+      .visitor-stats-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .visitor-card {
+        min-width: 92px;
+        padding: 8px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(79, 142, 247, 0.28);
+        background:
+          linear-gradient(
+            135deg,
+            rgba(79, 142, 247, 0.16),
+            rgba(139, 92, 246, 0.12)
+          ),
+          rgba(13, 17, 32, 0.78);
+        box-shadow:
+          0 10px 28px rgba(0, 0, 0, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(16px);
+        text-align: center;
+      }
+
+      .visitor-label {
+        display: block;
+        font-family: var(--font-head);
+        font-size: 10px;
+        font-weight: 800;
+        color: var(--text-2);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .visitor-card strong {
+        display: block;
+        font-family: var(--font-head);
+        font-size: 17px;
+        font-weight: 900;
+        color: var(--green);
+        line-height: 1;
+        text-shadow: 0 0 18px rgba(16, 217, 138, 0.4);
+      }
+
       .live-badge {
         display: flex;
         align-items: center;
@@ -158,6 +204,7 @@
         font-size: 12px;
         letter-spacing: 0.06em;
         text-transform: uppercase;
+        white-space: nowrap;
       }
 
       .live-dot {
@@ -181,7 +228,6 @@
         }
       }
 
-      /* ── MAIN LAYOUT ───────────────────────────────── */
       .workspace {
         position: relative;
         z-index: 2;
@@ -190,7 +236,6 @@
         min-height: calc(100vh - 73px - 80px);
       }
 
-      /* ── LEFT: PLAYER ZONE ─────────────────────────── */
       .player-zone {
         flex: 1;
         display: flex;
@@ -263,7 +308,6 @@
         font-size: 15px;
       }
 
-      /* Now-Playing info bar */
       .now-bar {
         display: flex;
         align-items: center;
@@ -318,7 +362,6 @@
         color: var(--text-2);
       }
 
-      /* ── RIGHT: SIDEBAR ────────────────────────────── */
       .sidebar {
         width: var(--sidebar-w);
         min-width: 0;
@@ -397,12 +440,12 @@
       #searchInput::placeholder {
         color: var(--text-3);
       }
+
       #searchInput:focus {
         border-color: var(--border-hover);
         box-shadow: 0 0 0 3px var(--accent-glow);
       }
 
-      /* categories */
       .cat-strip {
         display: flex;
         flex-wrap: wrap;
@@ -442,7 +485,6 @@
         box-shadow: 0 4px 14px rgba(79, 142, 247, 0.3);
       }
 
-      /* channel list */
       .channel-list {
         flex: 1;
         overflow-y: auto;
@@ -455,9 +497,11 @@
       .channel-list::-webkit-scrollbar {
         width: 4px;
       }
+
       .channel-list::-webkit-scrollbar-track {
         background: transparent;
       }
+
       .channel-list::-webkit-scrollbar-thumb {
         background: var(--surface-3);
         border-radius: 99px;
@@ -576,7 +620,6 @@
         border-radius: 14px;
       }
 
-      /* ── FOOTER ────────────────────────────────────── */
       footer {
         position: relative;
         z-index: 10;
@@ -658,7 +701,6 @@
         flex-shrink: 0;
       }
 
-      /* ── RESPONSIVE ───────────────────────────────── */
       @media (max-width: 1000px) {
         :root {
           --sidebar-w: 340px;
@@ -670,6 +712,25 @@
       }
 
       @media (max-width: 700px) {
+        header {
+          flex-wrap: wrap;
+          gap: 14px;
+        }
+
+        .header-right {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .visitor-stats-top {
+          flex: 1;
+        }
+
+        .visitor-card {
+          flex: 1;
+          min-width: 0;
+        }
+
         .workspace {
           flex-direction: column;
           height: auto;
@@ -715,6 +776,23 @@
           font-size: 19px;
         }
 
+        .header-right {
+          gap: 10px;
+        }
+
+        .visitor-card {
+          padding: 7px 9px;
+          border-radius: 13px;
+        }
+
+        .visitor-card strong {
+          font-size: 14px;
+        }
+
+        .visitor-label {
+          font-size: 9px;
+        }
+
         .live-badge {
           padding: 6px 10px;
           font-size: 11px;
@@ -754,7 +832,6 @@
   </head>
 
   <body>
-    <!-- HEADER -->
     <header>
       <div class="brand">
         <div class="brand-icon">
@@ -764,12 +841,26 @@
             />
           </svg>
         </div>
+
         <div class="brand-text">
           <h1>Hello World</h1>
           <span>Live Television</span>
         </div>
       </div>
+
       <div class="header-right">
+        <div class="visitor-stats-top">
+          <div class="visitor-card">
+            <span class="visitor-label">Today</span>
+            <strong id="todayVisitors">—</strong>
+          </div>
+
+          <div class="visitor-card">
+            <span class="visitor-label">Total</span>
+            <strong id="totalVisitors">—</strong>
+          </div>
+        </div>
+
         <div class="live-badge">
           <span class="live-dot"></span>
           Live TV
@@ -777,15 +868,16 @@
       </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
     <div class="workspace">
-      <!-- LEFT: VIDEO PLAYER -->
       <div class="player-zone">
         <div class="video-wrapper">
           <video id="video" controls playsinline></video>
+
           <div class="video-placeholder" id="videoPlaceholder">
             <div class="placeholder-icon">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              <svg viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
             </div>
             <p>Select a channel to start watching</p>
           </div>
@@ -799,10 +891,12 @@
               />
             </svg>
           </div>
+
           <div class="now-bar-text">
             <div class="now-bar-label">Now Playing</div>
             <div id="nowPlaying">No channel selected</div>
           </div>
+
           <div
             id="statusText"
             style="font-size: 13px; color: var(--text-3); flex-shrink: 0"
@@ -812,19 +906,20 @@
         </div>
       </div>
 
-      <!-- RIGHT: SIDEBAR -->
       <aside class="sidebar">
         <div class="sidebar-head">
           <div class="sidebar-title">
             Channels
             <span class="channel-count" id="channelCount">0</span>
           </div>
+
           <div class="search-box">
             <svg viewBox="0 0 24 24">
               <path
                 d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
               />
             </svg>
+
             <input
               type="text"
               id="searchInput"
@@ -834,12 +929,10 @@
         </div>
 
         <div class="cat-strip" id="categoryBar"></div>
-
         <div class="channel-list" id="channelList"></div>
       </aside>
     </div>
 
-    <!-- FOOTER -->
     <footer>
       <div class="footer-brand">
         <div class="footer-logo">
@@ -849,6 +942,7 @@
             />
           </svg>
         </div>
+
         <div class="footer-copy">
           &copy; 2025 <strong>Hello World TV</strong> — All rights reserved
         </div>
@@ -856,12 +950,11 @@
 
       <div class="footer-links">
         <a
-          href="https://facebook.com"
+          href="https://www.facebook.com/MDSiyamulNiRaB104"
           target="_blank"
           rel="noopener"
           class="footer-link"
         >
-          <!-- Facebook icon -->
           <svg viewBox="0 0 24 24">
             <path
               d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
@@ -869,13 +962,13 @@
           </svg>
           Facebook
         </a>
+
         <a
-          href="https://github.com"
+          href="https://github.com/Nirab410"
           target="_blank"
           rel="noopener"
           class="footer-link"
         >
-          <!-- GitHub icon -->
           <svg viewBox="0 0 24 24">
             <path
               d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"
