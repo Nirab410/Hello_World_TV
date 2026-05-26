@@ -1,4 +1,4 @@
-import { getStore } from "@netlify/blobs";
+import { getStore, connectLambda } from "@netlify/blobs";
 
 let localStats = {
   total: 0,
@@ -15,8 +15,10 @@ function getDhakaDateKey() {
   }).format(new Date());
 }
 
-async function getStatsFromStore() {
+async function getStatsFromStore(event) {
   try {
+    connectLambda(event); // Important for Netlify Functions Lambda mode
+
     const store = getStore("hello-world-tv-counter");
     const saved = await store.get("stats", { type: "json" });
 
@@ -26,7 +28,11 @@ async function getStatsFromStore() {
       data: saved || null,
     };
   } catch (err) {
-    console.warn("Netlify Blobs not available locally. Using local memory.");
+    console.error("Netlify Blobs failed:", err.message);
+
+    if (process.env.NETLIFY === "true") {
+      throw err; // Production এ local fallback না
+    }
 
     return {
       type: "local",
@@ -42,7 +48,7 @@ export const handler = async (event) => {
     const shouldCount = params.get("count") === "1";
     const todayKey = getDhakaDateKey();
 
-    const result = await getStatsFromStore();
+    const result = await getStatsFromStore(event);
 
     let data = result.data || {
       total: 0,
@@ -70,6 +76,7 @@ export const handler = async (event) => {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-store",
       },
       body: JSON.stringify({
         total: data.total,
@@ -81,9 +88,7 @@ export const handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         error: "Counter failed",
         details: err.message,
