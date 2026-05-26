@@ -1,19 +1,7 @@
-// Hello World TV — app.js
-// Add or edit channels in this array.
+// Hello World TV — fixed app.js
+// Replace your old app.js with this full file.
 
 const channels = [
-  {
-    name: "Bein Sports 1 HD",
-    category: "Sports",
-    logo: "https://via.placeholder.com/240x140/111827/ffffff?text=BEIN+SPORTS+1",
-    url: "http://main.light-ott.net:80/play/live.php?mac=00:1B:79:4A:54:2C&stream=985127&extension=ts",
-  },
-  {
-    name: "Bein Sports 3 HD",
-    category: "Sports",
-    logo: "https://via.placeholder.com/240x140/111827/ffffff?text=BEIN+SPORTS+3",
-    url: "http://main.light-ott.net:80/play/live.php?mac=00:1B:79:4A:54:2C&stream=985129&extension=ts",
-  },
   {
     name: "FIFA Plus",
     category: "Sports",
@@ -25,12 +13,6 @@ const channels = [
     category: "Sports",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
     url: "http://103.157.248.140:8000/play/a01m/index.m3u8",
-  },
-  {
-    name: "FanCode Live",
-    category: "Sports",
-    logo: "https://via.placeholder.com/220x120/111827/ffffff?text=FanCode",
-    url: "https://bd-mc-fblive.fancode.com/mumbai/142744_english_hls_50faac0fa112492_1ta-di_h264/1080p.m3u8",
   },
   {
     name: "BTV",
@@ -255,12 +237,6 @@ const channels = [
     url: "https://streams2.sofast.tv/sofast/goaltv/goaltv_3500k.m3u8",
   },
   {
-    name: "A Sports HD",
-    category: "sports",
-    logo: "",
-    url: "http://redforce.live:8082/A.SPORTS.HD/tracks-v1a1/mono.m3u8?token=e763124b1f76fdff03b047b3d343c9c171c57f73-409a6675214f414616aa2444e828cc57-1751358302-1751347502",
-  },
-  {
     name: "Tom & Jerry TV",
     category: "Cartoon",
     logo: "//i.ibb.co.com/RTN2G7fG/png-transparent-tom-and-jerry-smiling-illustration-tom-cat-jerry-mouse-nibbles-tom-and-jerry-tom-and.png",
@@ -279,212 +255,253 @@ const channels = [
     url: "https://amg00627-amg00627c29-rakuten-it-3989.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanitcc-rakutenit/playlist.m3u8",
   },
   {
-    name: "National Geography Wild",
-    category: "Documentry",
-    logo: "https://i.ibb.co.com/JRTy1vrd/download-1.png",
-    url: "http://103.157.248.140:8000/play/a010/index.m3u8",
-  },
-  {
-    name: "Hungama TV",
-    category: "Cartoon",
-    logo: "https://i.ibb.co.com/S4SvVpsn/png-clipart-hungama-tv-television-channel-utv-software-communications-logo-hungama-digital-media-ent.png",
-    url: "http://redforce.live:8082/HUNGAMA/tracks-v1a1/mono.m3u8?token=952211444805dfbf5935b0c02012d25209850b18-75b5cc50bde13abe3b5957cd841b0da6-1751358022-1751347222",
-  },
-  {
     name: "Cartoon Network",
     category: "Cartoon",
     logo: "https://i.ibb.co.com/KpzQsWyw/images.png",
     url: "https://tvsen5.aynaott.com/cartoonnetwork/tracks-v1a1/mono.ts.m3u8?e=1779508656",
   },
   {
-    name: "Star Sports Select 1 HD",
+    name: "Willow TV",
     category: "Sports",
-    logo: "https://i.ibb.co.com/Z1VsHxzB/Star-sports-select-1.webp",
-    url: "http://redforce.live:8082/STAR.SPORTS-SEL1.HD/tracks-v1a1/mono.m3u8?token=e492f1c750863956bf5949013c75c720a9a2f5f5-c021880c7576263a4757410839452d81-1751358921-1751348121",
+    logo: "https://i.ibb.co.com/mjC8LPM/Willow-is-on-DIRECTV.png",
+    url: "https://edge2.roarzone.net:8447/roarzone/edge5/willow-tv/tracks-v1a1/2026/05/26/03/06/45-05000.ts?token=d4bd232d26cb8a7f1d6c636cb8ea5abef910487a-1ec415dfcec5cd61f111e2cdf3e68e2e-1779775211-1779764411",
+  },
+  {
+    name: "ASports HD",
+    category: "Sports",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=A+Sports",
+    url: "https://edge2.roarzone.net:8447/roarzone/edge5/a-sports/tracks-v1a1/mono.m3u8?token=483227e09edc208b3920f9fbbac15723de2ac560-83c085fb01f4bb831776337d3eda8911-1779775247-1779764447",
+  },
+  {
+    name: "Sports Grid FIFA",
+    category: "Sports",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Sports+Grid",
+    url: "https://tvsen6.aynaott.com/SportsGrid/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
 ];
 
-/* ── DOM refs ───────────────────────────────────────── */
-const video = document.getElementById("video");
-const videoPlaceholder = document.getElementById("videoPlaceholder");
-const nowPlaying = document.getElementById("nowPlaying");
-const statusText = document.getElementById("statusText");
-const channelList = document.getElementById("channelList");
-const categoryBar = document.getElementById("categoryBar");
-const channelCount = document.getElementById("channelCount");
-const searchInput = document.getElementById("searchInput");
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.getElementById("video");
+  const videoPlaceholder = document.getElementById("videoPlaceholder");
+  const nowPlaying = document.getElementById("nowPlaying");
+  const statusText = document.getElementById("statusText");
+  const channelList = document.getElementById("channelList");
+  const categoryBar = document.getElementById("categoryBar");
+  const channelCount = document.getElementById("channelCount");
+  const searchInput = document.getElementById("searchInput");
 
-let hls = null;
-let activeCategory = "all";
-let activeChannelName = "";
-
-/* ── Helpers ───────────────────────────────────────── */
-function normalizeCategory(cat) {
-  return String(cat || "Uncategorized")
-    .trim()
-    .toLowerCase();
-}
-
-function formatCategory(cat) {
-  const value = String(cat || "Uncategorized").trim();
-  const fixes = {
-    bangladeshi: "Bangladeshi",
-    sports: "Sports",
-    news: "News",
-    cartoon: "Cartoon",
-    documentry: "Documentary",
-    documentary: "Documentary",
-  };
-
-  const key = value.toLowerCase();
-  return fixes[key] || value.charAt(0).toUpperCase() + value.slice(1);
-}
-
-function getLogoUrl(url) {
-  if (!url) return "https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV";
-  return url.startsWith("//") ? `https:${url}` : url;
-}
-
-function getCategories() {
-  const categories = new Map();
-
-  channels.forEach((c) => {
-    const key = normalizeCategory(c.category);
-    if (!categories.has(key)) categories.set(key, formatCategory(c.category));
-  });
-
-  return [{ key: "all", label: "All" }, ...categories.entries()].map((item) => {
-    if (Array.isArray(item)) return { key: item[0], label: item[1] };
-    return item;
-  });
-}
-
-function getFiltered() {
-  const kw = searchInput.value.trim().toLowerCase();
-
-  return channels.filter((c) => {
-    const catOk =
-      activeCategory === "all" ||
-      normalizeCategory(c.category) === activeCategory;
-    const kwOk = c.name.toLowerCase().includes(kw);
-    return catOk && kwOk;
-  });
-}
-
-/* ── Render: category strip ─────────────────────────── */
-function renderCategories() {
-  categoryBar.innerHTML = "";
-
-  getCategories().forEach((cat) => {
-    const btn = document.createElement("button");
-    btn.className = "cat-btn" + (cat.key === activeCategory ? " active" : "");
-    btn.textContent = cat.label;
-
-    btn.addEventListener("click", () => {
-      activeCategory = cat.key;
-      renderCategories();
-      renderChannels();
-    });
-
-    categoryBar.appendChild(btn);
-  });
-}
-
-/* ── Render: channel list (sidebar) ────────────────── */
-function renderChannels() {
-  const list = getFiltered();
-  channelList.innerHTML = "";
-  channelCount.textContent = list.length;
-
-  if (list.length === 0) {
-    channelList.innerHTML = `<div class="empty-msg">No channels found.</div>`;
+  if (!video || !channelList || !categoryBar || !channelCount || !searchInput) {
+    console.error("Required HTML element missing.");
     return;
   }
 
-  list.forEach((ch) => {
-    const item = document.createElement("div");
-    item.className =
-      "channel-item" + (ch.name === activeChannelName ? " active" : "");
+  let hls = null;
+  let activeCategory = "all";
+  let activeChannelName = "";
 
-    item.innerHTML = `
-      <div class="ch-logo">
-        <img src="${getLogoUrl(ch.logo)}" alt="${ch.name}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV';">
-      </div>
-      <div class="ch-info">
-        <div class="ch-name">${ch.name}</div>
-        <div class="ch-cat">${formatCategory(ch.category)}</div>
-      </div>
-      <div class="ch-play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-    `;
-
-    item.addEventListener("click", () => playChannel(ch));
-    channelList.appendChild(item);
-  });
-}
-
-/* ── Play ───────────────────────────────────────────── */
-function playChannel(ch) {
-  activeChannelName = ch.name;
-  nowPlaying.textContent = ch.name;
-  statusText.textContent = "Connecting…";
-  renderChannels();
-
-  // Hide placeholder
-  videoPlaceholder.classList.add("hidden");
-
-  // Destroy previous HLS instance
-  if (hls) {
-    hls.destroy();
-    hls = null;
+  function normalizeCategory(cat) {
+    return String(cat || "Uncategorized")
+      .trim()
+      .toLowerCase();
   }
-  video.pause();
-  video.removeAttribute("src");
-  video.load();
 
-  /* HLS.js path */
-  if (Hls.isSupported()) {
-    hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-    hls.loadSource(ch.url);
-    hls.attachMedia(video);
+  function formatCategory(cat) {
+    const value = String(cat || "Uncategorized").trim();
+    const fixes = {
+      bangladeshi: "Bangladeshi",
+      sports: "Sports",
+      news: "News",
+      cartoon: "Cartoon",
+      documentry: "Documentary",
+      documentary: "Documentary",
+    };
+    const key = value.toLowerCase();
+    return fixes[key] || value.charAt(0).toUpperCase() + value.slice(1);
+  }
 
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      statusText.textContent = "Live";
-      video.play().catch(() => {
-        statusText.textContent = "Tap ▶ to play";
-      });
-    });
+  function getLogoUrl(url) {
+    if (!url) return "https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV";
+    return url.startsWith("//") ? "https:" + url : url;
+  }
 
-    hls.on(Hls.Events.ERROR, (_, data) => {
-      if (data.fatal) {
-        statusText.textContent =
-          "Stream error — link may be expired or CORS-blocked.";
-        videoPlaceholder.classList.remove("hidden");
+  function escapeHtml(text) {
+    return String(text || "").replace(
+      /[&<>"']/g,
+      (m) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        })[m],
+    );
+  }
+
+  function getCategories() {
+    const categories = new Map();
+
+    channels.forEach((c) => {
+      const key = normalizeCategory(c.category);
+      if (!categories.has(key)) {
+        categories.set(key, formatCategory(c.category));
       }
     });
 
-    return;
+    return [
+      { key: "all", label: "All" },
+      ...Array.from(categories, ([key, label]) => ({ key, label })),
+    ];
   }
 
-  /* Native HLS (Safari / iOS) */
-  if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = ch.url;
-    video.addEventListener(
-      "loadedmetadata",
-      () => {
+  function getFiltered() {
+    const kw = searchInput.value.trim().toLowerCase();
+
+    return channels.filter((c) => {
+      const catOk =
+        activeCategory === "all" ||
+        normalizeCategory(c.category) === activeCategory;
+
+      const kwOk = String(c.name || "")
+        .toLowerCase()
+        .includes(kw);
+
+      return catOk && kwOk;
+    });
+  }
+
+  function renderCategories() {
+    categoryBar.innerHTML = "";
+
+    getCategories().forEach((cat) => {
+      const btn = document.createElement("button");
+      btn.className = "cat-btn" + (cat.key === activeCategory ? " active" : "");
+      btn.textContent = cat.label;
+
+      btn.addEventListener("click", () => {
+        activeCategory = cat.key;
+        renderCategories();
+        renderChannels();
+      });
+
+      categoryBar.appendChild(btn);
+    });
+  }
+
+  function renderChannels() {
+    const list = getFiltered();
+    channelList.innerHTML = "";
+    channelCount.textContent = String(list.length);
+
+    if (list.length === 0) {
+      channelList.innerHTML = '<div class="empty-msg">No channels found.</div>';
+      return;
+    }
+
+    list.forEach((ch) => {
+      const item = document.createElement("div");
+      item.className =
+        "channel-item" + (ch.name === activeChannelName ? " active" : "");
+
+      item.innerHTML = `
+        <div class="ch-logo">
+          <img src="${escapeHtml(getLogoUrl(ch.logo))}"
+               alt="${escapeHtml(ch.name)}"
+               loading="lazy"
+               onerror="this.onerror=null;this.src='https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV';">
+        </div>
+        <div class="ch-info">
+          <div class="ch-name">${escapeHtml(ch.name)}</div>
+          <div class="ch-cat">${escapeHtml(formatCategory(ch.category))}</div>
+        </div>
+        <div class="ch-play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      `;
+
+      item.addEventListener("click", () => playChannel(ch));
+      channelList.appendChild(item);
+    });
+  }
+
+  function playChannel(ch) {
+    activeChannelName = ch.name;
+    nowPlaying.textContent = ch.name || "Unknown channel";
+    statusText.textContent = "Connecting…";
+    renderChannels();
+
+    if (videoPlaceholder) {
+      videoPlaceholder.classList.add("hidden");
+    }
+
+    if (hls) {
+      hls.destroy();
+      hls = null;
+    }
+
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+
+    if (!ch.url) {
+      statusText.textContent = "No stream URL found.";
+      if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
+      return;
+    }
+
+    if (window.Hls && Hls.isSupported()) {
+      hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+      });
+
+      hls.loadSource(ch.url);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
         statusText.textContent = "Live";
-        video.play();
-      },
-      { once: true },
-    );
-    return;
+        video.play().catch(() => {
+          statusText.textContent = "Tap ▶ to play";
+        });
+      });
+
+      hls.on(Hls.Events.ERROR, (_, data) => {
+        console.warn("HLS error:", data);
+
+        if (data && data.fatal) {
+          statusText.textContent =
+            "Stream error — expired, CORS-blocked, or offline.";
+          if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
+        }
+      });
+
+      return;
+    }
+
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = ch.url;
+
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          statusText.textContent = "Live";
+          video.play().catch(() => {
+            statusText.textContent = "Tap ▶ to play";
+          });
+        },
+        { once: true },
+      );
+
+      return;
+    }
+
+    statusText.textContent = "HLS not supported in this browser.";
   }
 
-  statusText.textContent = "HLS not supported in this browser.";
-}
+  searchInput.addEventListener("input", renderChannels);
 
-/* ── Init ───────────────────────────────────────────── */
-searchInput.addEventListener("input", renderChannels);
-renderCategories();
-renderChannels();
+  renderCategories();
+  renderChannels();
+
+  console.log("Hello World TV loaded:", channels.length, "channels");
+});
