@@ -270,7 +270,7 @@ const channels = [
     name: "ASports HD",
     category: "Sports",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=A+Sports",
-    url: "https://tvsen5.aynaott.com/willowhd/tracks-v1a1/mono.ts.m3u8?e=1779508653",
+    url: "https://streams2.sofast.tv/sofast3/v1/0197e8dc0d161eb4611d3421466de9/0197e8dc55c71ebd416a57de38aff/686CC86100007B696871-p0_tmpl3500k_3500k-1779774438011.ts",
   },
   {
     name: "Sports Grid",
