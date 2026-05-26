@@ -9,12 +9,6 @@ const channels = [
     url: "https://37b4c228.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWZyX0ZJRkFQbHVzRnJlbmNoX0hMUw/6f5437c5-e015-4754-8476-c8c6d27d3a55/1.m3u8",
   },
   {
-    name: "Star Sports 1 HD",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "http://103.157.248.140:8000/play/a01m/index.m3u8",
-  },
-  {
     name: "BTV",
     category: "bangladeshi",
     logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
