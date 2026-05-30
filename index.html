@@ -308,6 +308,114 @@
         font-size: 15px;
       }
 
+      /* ── Loading Overlay ── */
+      #loadingOverlay {
+        display: none;
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 18px;
+        background: rgba(6, 8, 15, 0.82);
+        backdrop-filter: blur(8px);
+        border-radius: var(--radius);
+        pointer-events: none;
+      }
+
+      #loadingOverlay.show {
+        display: flex;
+      }
+
+      .loading-spinner {
+        position: relative;
+        width: 60px;
+        height: 60px;
+      }
+
+      .loading-spinner::before,
+      .loading-spinner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 3px solid transparent;
+      }
+
+      .loading-spinner::before {
+        border-top-color: var(--accent);
+        border-right-color: var(--accent);
+        animation: spin 0.9s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+        box-shadow: 0 0 18px rgba(79, 142, 247, 0.45);
+      }
+
+      .loading-spinner::after {
+        border-bottom-color: var(--accent-2);
+        border-left-color: var(--accent-2);
+        animation: spin-reverse 1.2s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+        inset: 8px;
+        opacity: 0.7;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin-reverse {
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+      .loading-dot-pulse {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        animation: dot-pulse 1s ease-in-out infinite;
+        box-shadow: 0 0 12px rgba(79, 142, 247, 0.6);
+      }
+
+      @keyframes dot-pulse {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(0.6);
+          opacity: 0.5;
+        }
+      }
+
+      .loading-text {
+        text-align: center;
+      }
+
+      .loading-title {
+        font-family: var(--font-head);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+      }
+
+      .loading-subtitle {
+        font-size: 12px;
+        color: var(--text-2);
+        margin-top: 5px;
+        letter-spacing: 0.04em;
+      }
+
+      /* ── Now Playing Bar ── */
       .now-bar {
         display: flex;
         align-items: center;
@@ -362,6 +470,146 @@
         color: var(--text-2);
       }
 
+      /* ── News Ticker ── */
+      .ticker-wrap {
+        display: flex;
+        align-items: center;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          135deg,
+          rgba(13, 17, 32, 0.9),
+          rgba(18, 24, 41, 0.85)
+        );
+        backdrop-filter: blur(12px);
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+        height: 42px;
+        flex-shrink: 0;
+      }
+
+      .ticker-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 14px;
+        height: 100%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        font-family: var(--font-head);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #fff;
+        white-space: nowrap;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .ticker-label::after {
+        content: "";
+        position: absolute;
+        right: -10px;
+        top: 0;
+        bottom: 0;
+        width: 20px;
+        background: linear-gradient(90deg, var(--accent-2), transparent);
+        clip-path: polygon(0 0, 60% 0, 100% 50%, 60% 100%, 0 100%);
+      }
+
+      .ticker-label-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        animation: pulse 1.6s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+
+      .ticker-track {
+        flex: 1;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          black 4%,
+          black 94%,
+          transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          black 4%,
+          black 94%,
+          transparent 100%
+        );
+      }
+
+      .ticker-content {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        animation: ticker-scroll 32s linear infinite;
+        will-change: transform;
+        padding-left: 100%;
+      }
+
+      .ticker-content:hover {
+        animation-play-state: paused;
+      }
+
+      .ticker-text {
+        font-family: var(--font-body);
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text-2);
+        letter-spacing: 0.01em;
+        padding-right: 80px;
+      }
+
+      .ticker-sep {
+        color: var(--accent);
+        margin: 0 10px;
+        font-size: 15px;
+        opacity: 0.7;
+      }
+
+      @keyframes ticker-scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .ticker-wrap {
+          height: 38px;
+          border-radius: 12px;
+        }
+
+        .ticker-label {
+          padding: 0 10px;
+          font-size: 9px;
+          letter-spacing: 0.1em;
+        }
+
+        .ticker-text {
+          font-size: 12px;
+        }
+
+        .ticker-content {
+          animation-duration: 24s;
+        }
+      }
+
+      /* ── Sidebar ── */
       .sidebar {
         width: var(--sidebar-w);
         min-width: 0;
@@ -881,6 +1129,17 @@
             </div>
             <p>Select a channel to start watching</p>
           </div>
+
+          <!-- Loading Overlay -->
+          <div id="loadingOverlay">
+            <div class="loading-spinner">
+              <div class="loading-dot-pulse"></div>
+            </div>
+            <div class="loading-text">
+              <div class="loading-title">Loading Channel</div>
+              <div class="loading-subtitle">Connecting to live stream...</div>
+            </div>
+          </div>
         </div>
 
         <div class="now-bar">
@@ -902,6 +1161,39 @@
             style="font-size: 13px; color: var(--text-3); flex-shrink: 0"
           >
             —
+          </div>
+        </div>
+
+        <!-- News Ticker -->
+        <!-- To edit ticker text, change the content inside the two .ticker-text spans below -->
+        <div class="ticker-wrap">
+          <div class="ticker-label">
+            <span class="ticker-label-dot"></span>
+            Update
+          </div>
+          <div class="ticker-track">
+            <div class="ticker-content">
+              <!-- First copy -->
+              <span class="ticker-text">
+                Welcome to Hello World TV
+                <span class="ticker-sep">•</span>
+                Enjoy live channels
+                <span class="ticker-sep">•</span>
+                If any channel does not work, please calmly try another one
+                <span class="ticker-sep">•</span>
+                More channels coming soon
+              </span>
+              <!-- Duplicate for seamless loop -->
+              <span class="ticker-text">
+                Welcome to Hello World TV
+                <span class="ticker-sep">•</span>
+                Enjoy live channels
+                <span class="ticker-sep">•</span>
+                If any channel does not work, please calmly try another one
+                <span class="ticker-sep">•</span>
+                More channels coming soon
+              </span>
+            </div>
           </div>
         </div>
       </div>

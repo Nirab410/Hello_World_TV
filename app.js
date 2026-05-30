@@ -260,7 +260,6 @@ const channels = [
     logo: "https://i.ibb.co.com/mjC8LPM/Willow-is-on-DIRECTV.png",
     url: "https://tvsen5.aynaott.com/willowhd/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
-
   {
     name: "ASports HD",
     category: "Sports",
@@ -297,22 +296,24 @@ const channels = [
     logo: "https://i.ibb.co.com/hRYXS3nb/Islamic-TV-New-Logo.png",
     url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/1724-audio_113542_eng=113200-video=2202800.m3u8",
   },
-{
-  name: "Sony Sports 2",
-  category: "Sports",
-  logo: "https://i.ibb.co.com/k2j5h13J/SONY-Sports-Ten2-SD-Logo-CLR.png",
-  url: "https://edge2.roarzone.net:8447/roarzone/edge3/sony_sports_2_hd/tracks-v1a1/mono.m3u8?token=c01fdb414ac928fe43535112591cde66835f0aaf-05542ac039de97112ff8df0f4ca77c8c-1780139959-1780129159",
-},
-{
-  name: "Jungle Book",
-  category: "Cartoon",
-  logo: "https://i.ibb.co.com/LhD5xLyT/MV5-BNDM1-OWI1-Mz-It-N2-Zl-Ni00-Mj-My-LTg5-ZGIt-Yjgw-YTdh-OTY3-Zjhk-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg", url:"https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
-},
+  {
+    name: "Sony Sports 2",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/k2j5h13J/SONY-Sports-Ten2-SD-Logo-CLR.png",
+    url: "https://edge2.roarzone.net:8447/roarzone/edge3/sony_sports_2_hd/tracks-v1a1/mono.m3u8?token=c01fdb414ac928fe43535112591cde66835f0aaf-05542ac039de97112ff8df0f4ca77c8c-1780139959-1780129159",
+  },
+  {
+    name: "Jungle Book",
+    category: "Cartoon",
+    logo: "https://i.ibb.co.com/LhD5xLyT/MV5-BNDM1-OWI1-Mz-It-N2-Zl-Ni00-Mj-My-LTg5-ZGIt-Yjgw-YTdh-OTY3-Zjhk-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
+    url: "https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
+  },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("video");
   const videoPlaceholder = document.getElementById("videoPlaceholder");
+  const loadingOverlay = document.getElementById("loadingOverlay"); // ← নতুন
   const nowPlaying = document.getElementById("nowPlaying");
   const statusText = document.getElementById("statusText");
   const channelList = document.getElementById("channelList");
@@ -328,6 +329,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let hls = null;
   let activeCategory = "all";
   let activeChannelName = "";
+
+  // ── Overlay helpers ──────────────────────────────────────────
+  function showLoading() {
+    if (loadingOverlay) loadingOverlay.classList.add("show");
+  }
+
+  function hideLoading() {
+    if (loadingOverlay) loadingOverlay.classList.remove("show");
+  }
+  // ─────────────────────────────────────────────────────────────
 
   function normalizeCategory(cat) {
     return String(cat || "Uncategorized")
@@ -370,14 +381,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getCategories() {
     const categories = new Map();
-
     channels.forEach((c) => {
       const key = normalizeCategory(c.category);
       if (!categories.has(key)) {
         categories.set(key, formatCategory(c.category));
       }
     });
-
     return [
       { key: "all", label: "All" },
       ...Array.from(categories, ([key, label]) => ({ key, label })),
@@ -386,34 +395,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getFiltered() {
     const kw = searchInput.value.trim().toLowerCase();
-
     return channels.filter((c) => {
       const catOk =
         activeCategory === "all" ||
         normalizeCategory(c.category) === activeCategory;
-
       const kwOk = String(c.name || "")
         .toLowerCase()
         .includes(kw);
-
       return catOk && kwOk;
     });
   }
 
   function renderCategories() {
     categoryBar.innerHTML = "";
-
     getCategories().forEach((cat) => {
       const btn = document.createElement("button");
       btn.className = "cat-btn" + (cat.key === activeCategory ? " active" : "");
       btn.textContent = cat.label;
-
       btn.addEventListener("click", () => {
         activeCategory = cat.key;
         renderCategories();
         renderChannels();
       });
-
       categoryBar.appendChild(btn);
     });
   }
@@ -464,6 +467,9 @@ document.addEventListener("DOMContentLoaded", () => {
       videoPlaceholder.classList.add("hidden");
     }
 
+    // ── Loading overlay দেখাও ──
+    showLoading();
+
     if (hls) {
       hls.destroy();
       hls = null;
@@ -474,6 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
     video.load();
 
     if (!ch.url) {
+      hideLoading(); // ← URL না থাকলে লুকাও
       statusText.textContent = "No stream URL found.";
       if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
       return;
@@ -489,6 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
       hls.attachMedia(video);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        hideLoading(); // ← stream ready, overlay লুকাও
         statusText.textContent = "Live";
         video.play().catch(() => {
           statusText.textContent = "Tap ▶ to play";
@@ -497,8 +505,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       hls.on(Hls.Events.ERROR, (_, data) => {
         console.warn("HLS error:", data);
-
         if (data && data.fatal) {
+          hideLoading(); // ← fatal error হলেও লুকাও
           statusText.textContent =
             "Stream error — expired, CORS-blocked, or offline.";
           if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
@@ -508,12 +516,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Native HLS (Safari / iOS)
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = ch.url;
 
       video.addEventListener(
         "loadedmetadata",
         () => {
+          hideLoading(); // ← metadata loaded, overlay লুকাও
           statusText.textContent = "Live";
           video.play().catch(() => {
             statusText.textContent = "Tap ▶ to play";
@@ -522,9 +532,22 @@ document.addEventListener("DOMContentLoaded", () => {
         { once: true },
       );
 
+      // Safari-এ error হলেও লুকাও
+      video.addEventListener(
+        "error",
+        () => {
+          hideLoading();
+          statusText.textContent =
+            "Stream error — expired, CORS-blocked, or offline.";
+          if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
+        },
+        { once: true },
+      );
+
       return;
     }
 
+    hideLoading(); // ← HLS support নেই
     statusText.textContent = "HLS not supported in this browser.";
   }
 
@@ -535,6 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Hello World TV loaded:", channels.length, "channels");
 });
+
 async function loadVisitorStats() {
   const todayEl = document.getElementById("todayVisitors");
   const totalEl = document.getElementById("totalVisitors");
