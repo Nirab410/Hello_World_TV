@@ -308,12 +308,19 @@ const channels = [
     logo: "https://i.ibb.co.com/LhD5xLyT/MV5-BNDM1-OWI1-Mz-It-N2-Zl-Ni00-Mj-My-LTg5-ZGIt-Yjgw-YTdh-OTY3-Zjhk-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
     url: "https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
   },
+  {
+    name: "Koora City",
+    category: "Sports",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
+    type: "iframe",
+    url: "https://jkndasijn.work.gd/embed.php?id=9101004880",
+  },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("video");
   const videoPlaceholder = document.getElementById("videoPlaceholder");
-  const loadingOverlay = document.getElementById("loadingOverlay"); // ← নতুন
+  const loadingOverlay = document.getElementById("loadingOverlay");
   const nowPlaying = document.getElementById("nowPlaying");
   const statusText = document.getElementById("statusText");
   const channelList = document.getElementById("channelList");
@@ -330,7 +337,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeCategory = "all";
   let activeChannelName = "";
 
-  // ── Overlay helpers ──────────────────────────────────────────
   function showLoading() {
     if (loadingOverlay) loadingOverlay.classList.add("show");
   }
@@ -338,7 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function hideLoading() {
     if (loadingOverlay) loadingOverlay.classList.remove("show");
   }
-  // ─────────────────────────────────────────────────────────────
 
   function normalizeCategory(cat) {
     return String(cat || "Uncategorized")
@@ -355,13 +360,19 @@ document.addEventListener("DOMContentLoaded", () => {
       cartoon: "Cartoon",
       documentry: "Documentary",
       documentary: "Documentary",
+      entertainment: "Entertainment",
+      islamic: "Islamic",
     };
+
     const key = value.toLowerCase();
     return fixes[key] || value.charAt(0).toUpperCase() + value.slice(1);
   }
 
   function getLogoUrl(url) {
-    if (!url) return "https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV";
+    if (!url) {
+      return "https://via.placeholder.com/120x80/1a2236/eef2ff?text=TV";
+    }
+
     return url.startsWith("//") ? "https:" + url : url;
   }
 
@@ -381,12 +392,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getCategories() {
     const categories = new Map();
-    channels.forEach((c) => {
-      const key = normalizeCategory(c.category);
+
+    channels.forEach((channel) => {
+      const key = normalizeCategory(channel.category);
+
       if (!categories.has(key)) {
-        categories.set(key, formatCategory(c.category));
+        categories.set(key, formatCategory(channel.category));
       }
     });
+
     return [
       { key: "all", label: "All" },
       ...Array.from(categories, ([key, label]) => ({ key, label })),
@@ -394,35 +408,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getFiltered() {
-    const kw = searchInput.value.trim().toLowerCase();
-    return channels.filter((c) => {
-      const catOk =
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    return channels.filter((channel) => {
+      const categoryOk =
         activeCategory === "all" ||
-        normalizeCategory(c.category) === activeCategory;
-      const kwOk = String(c.name || "")
+        normalizeCategory(channel.category) === activeCategory;
+
+      const keywordOk = String(channel.name || "")
         .toLowerCase()
-        .includes(kw);
-      return catOk && kwOk;
+        .includes(keyword);
+
+      return categoryOk && keywordOk;
     });
   }
 
   function renderCategories() {
     categoryBar.innerHTML = "";
+
     getCategories().forEach((cat) => {
       const btn = document.createElement("button");
       btn.className = "cat-btn" + (cat.key === activeCategory ? " active" : "");
       btn.textContent = cat.label;
+
       btn.addEventListener("click", () => {
         activeCategory = cat.key;
         renderCategories();
         renderChannels();
       });
+
       categoryBar.appendChild(btn);
     });
   }
 
   function renderChannels() {
     const list = getFiltered();
+
     channelList.innerHTML = "";
     channelCount.textContent = String(list.length);
 
@@ -457,32 +478,86 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function playChannel(ch) {
-    activeChannelName = ch.name;
-    nowPlaying.textContent = ch.name || "Unknown channel";
-    statusText.textContent = "Connecting…";
-    renderChannels();
-
-    if (videoPlaceholder) {
-      videoPlaceholder.classList.add("hidden");
-    }
-
-    // ── Loading overlay দেখাও ──
-    showLoading();
-
+  function stopCurrentPlayback() {
     if (hls) {
       hls.destroy();
       hls = null;
     }
 
+    const iframePlayer = document.getElementById("iframePlayer");
+
+    if (iframePlayer) {
+      iframePlayer.style.display = "none";
+      iframePlayer.src = "";
+    }
+
     video.pause();
     video.removeAttribute("src");
     video.load();
+    video.style.display = "block";
+  }
+
+  function playChannel(ch) {
+    activeChannelName = ch.name;
+    nowPlaying.textContent = ch.name || "Unknown channel";
+    statusText.textContent = "Connecting…";
+
+    renderChannels();
+    showLoading();
+
+    if (videoPlaceholder) {
+      videoPlaceholder.classList.add("hidden");
+    }
+
+    stopCurrentPlayback();
+
+    const videoWrapper = document.querySelector(".video-wrapper");
+    let iframePlayer = document.getElementById("iframePlayer");
+
+    if (ch.type === "iframe") {
+      video.style.display = "none";
+
+      if (!iframePlayer) {
+        iframePlayer = document.createElement("iframe");
+        iframePlayer.id = "iframePlayer";
+        iframePlayer.allowFullscreen = true;
+        iframePlayer.frameBorder = "0";
+        iframePlayer.setAttribute(
+          "allow",
+          "autoplay; fullscreen; encrypted-media; picture-in-picture",
+        );
+
+        iframePlayer.style.position = "absolute";
+        iframePlayer.style.inset = "0";
+        iframePlayer.style.width = "100%";
+        iframePlayer.style.height = "100%";
+        iframePlayer.style.border = "0";
+        iframePlayer.style.background = "#000";
+        iframePlayer.style.zIndex = "3";
+
+        videoWrapper.appendChild(iframePlayer);
+      }
+
+      iframePlayer.src = ch.url;
+      iframePlayer.style.display = "block";
+
+      statusText.textContent = "Embedded Player";
+
+      setTimeout(() => {
+        hideLoading();
+      }, 1200);
+
+      return;
+    }
 
     if (!ch.url) {
-      hideLoading(); // ← URL না থাকলে লুকাও
       statusText.textContent = "No stream URL found.";
-      if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
+
+      if (videoPlaceholder) {
+        videoPlaceholder.classList.remove("hidden");
+      }
+
+      hideLoading();
       return;
     }
 
@@ -496,8 +571,9 @@ document.addEventListener("DOMContentLoaded", () => {
       hls.attachMedia(video);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        hideLoading(); // ← stream ready, overlay লুকাও
         statusText.textContent = "Live";
+        hideLoading();
+
         video.play().catch(() => {
           statusText.textContent = "Tap ▶ to play";
         });
@@ -505,26 +581,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
       hls.on(Hls.Events.ERROR, (_, data) => {
         console.warn("HLS error:", data);
+
         if (data && data.fatal) {
-          hideLoading(); // ← fatal error হলেও লুকাও
           statusText.textContent =
             "Stream error — expired, CORS-blocked, or offline.";
-          if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
+
+          if (videoPlaceholder) {
+            videoPlaceholder.classList.remove("hidden");
+          }
+
+          hideLoading();
         }
       });
 
       return;
     }
 
-    // Native HLS (Safari / iOS)
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = ch.url;
 
       video.addEventListener(
         "loadedmetadata",
         () => {
-          hideLoading(); // ← metadata loaded, overlay লুকাও
           statusText.textContent = "Live";
+          hideLoading();
+
           video.play().catch(() => {
             statusText.textContent = "Tap ▶ to play";
           });
@@ -532,68 +613,55 @@ document.addEventListener("DOMContentLoaded", () => {
         { once: true },
       );
 
-      // Safari-এ error হলেও লুকাও
-      video.addEventListener(
-        "error",
-        () => {
-          hideLoading();
-          statusText.textContent =
-            "Stream error — expired, CORS-blocked, or offline.";
-          if (videoPlaceholder) videoPlaceholder.classList.remove("hidden");
-        },
-        { once: true },
-      );
-
       return;
     }
 
-    hideLoading(); // ← HLS support নেই
     statusText.textContent = "HLS not supported in this browser.";
+    hideLoading();
+  }
+
+  async function loadVisitorStats() {
+    const todayEl = document.getElementById("todayVisitors");
+    const totalEl = document.getElementById("totalVisitors");
+
+    if (!todayEl || !totalEl) return;
+
+    const KEY = "hello_world_tv_last_counted_at";
+    const ONE_DAY = 24 * 60 * 60 * 1000;
+
+    const lastCounted = Number(localStorage.getItem(KEY) || 0);
+    const now = Date.now();
+    const shouldCount = !lastCounted || now - lastCounted >= ONE_DAY;
+
+    try {
+      const res = await fetch(
+        `/.netlify/functions/view-counter?count=${shouldCount ? "1" : "0"}`,
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.details || "Counter error");
+      }
+
+      if (shouldCount) {
+        localStorage.setItem(KEY, String(now));
+      }
+
+      todayEl.textContent = Number(data.today || 0).toLocaleString();
+      totalEl.textContent = Number(data.total || 0).toLocaleString();
+    } catch (err) {
+      console.error("Visitor counter error:", err);
+      todayEl.textContent = "N/A";
+      totalEl.textContent = "N/A";
+    }
   }
 
   searchInput.addEventListener("input", renderChannels);
 
   renderCategories();
   renderChannels();
+  loadVisitorStats();
 
   console.log("Hello World TV loaded:", channels.length, "channels");
 });
-
-async function loadVisitorStats() {
-  const todayEl = document.getElementById("todayVisitors");
-  const totalEl = document.getElementById("totalVisitors");
-
-  if (!todayEl || !totalEl) return;
-
-  const KEY = "hello_world_tv_last_counted_at";
-  const ONE_DAY = 24 * 60 * 60 * 1000;
-
-  const lastCounted = Number(localStorage.getItem(KEY) || 0);
-  const now = Date.now();
-  const shouldCount = !lastCounted || now - lastCounted >= ONE_DAY;
-
-  try {
-    const res = await fetch(
-      `/.netlify/functions/view-counter?count=${shouldCount ? "1" : "0"}`,
-    );
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.details || "Counter error");
-    }
-
-    if (shouldCount) {
-      localStorage.setItem(KEY, String(now));
-    }
-
-    todayEl.textContent = Number(data.today || 0).toLocaleString();
-    totalEl.textContent = Number(data.total || 0).toLocaleString();
-  } catch (err) {
-    console.error("Visitor counter error:", err);
-    todayEl.textContent = "N/A";
-    totalEl.textContent = "N/A";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", loadVisitorStats);
