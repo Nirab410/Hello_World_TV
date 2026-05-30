@@ -297,18 +297,6 @@ const channels = [
     logo: "https://i.ibb.co.com/hRYXS3nb/Islamic-TV-New-Logo.png",
     url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1724/output/1724-audio_113542_eng=113200-video=2202800.m3u8",
   },
-   {
-    name: "Jungle Book",
-    category: "Cartoon",
-    logo: "https://i.ibb.co.com/LhD5xLyT/MV5-BNDM1-OWI1-Mz-It-N2-Zl-Ni00-Mj-My-LTg5-ZGIt-Yjgw-YTdh-OTY3-Zjhk-Xk-Ey-Xk-Fqc-Gc-V1-FMjpg-UX1000.jpg",
-    url: "https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
-  },
-  {
-    name: "Sony Sports 2",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/k2j5h13J/SONY-Sports-Ten2-SD-Logo-CLR.png",
-    url: "https://edge2.roarzone.net:8447/roarzone/edge3/sony_sports_2_hd/tracks-v1a1/mono.m3u8?token=c01fdb414ac928fe43535112591cde66835f0aaf-05542ac039de97112ff8df0f4ca77c8c-1780139959-1780129159",
-  },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
