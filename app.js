@@ -659,3 +659,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Hello World TV loaded:", channels.length, "channels");
 });
+async function loadVisitorCount() {
+  try {
+    const res = await fetch("/api/views");
+    const data = await res.json();
+
+    if (data.error) {
+      console.error(data.error);
+      return;
+    }
+
+    document.getElementById("todayVisitors").textContent = data.today;
+    document.getElementById("totalVisitors").textContent = data.total;
+  } catch (error) {
+    console.error("Visitor counter error:", error);
+  }
+}
+
+loadVisitorCount();
