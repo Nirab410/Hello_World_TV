@@ -1,11 +1,11 @@
-# Hello World TV Web App
+# Hello World TV 
 
 A clean and user-friendly web-based TV streaming app where users can watch live TV channels directly from the browser.
 
 ## Live Demo
 
 Visit the app here:  
-https://helloworldtvwebapp.netlify.app/
+[helloworldtv.pages.dev](https://helloworldtv.pages.dev/)
 
 ## Overview
 
