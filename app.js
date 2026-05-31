@@ -105,12 +105,6 @@ const channels = [
     url: "https://stream.ottplus.live/live/bijoy_tv_abr/live/bijoy_tv_480/chunks.m3u8",
   },
   {
-    name: "Asian TV",
-    category: "bangladeshi",
-    logo: "https://i.ibb.co.com/mCwss66N/Asian-TV.png",
-    url: "https://proxy.torongoplus.workers.dev/?url=https://mtlivestream.com/hls/asian/ytlive/index.m3u8",
-  },
-  {
     name: "Nexus TV",
     category: "bangladeshi",
     logo: "https://i.ibb.co.com/d0hw38JN/Nexus-TV.png",
