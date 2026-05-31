@@ -614,65 +614,57 @@ document.addEventListener("DOMContentLoaded", () => {
     hideLoading();
   }
 
-  async function loadVisitorStats() {
-    const todayEl = document.getElementById("todayVisitors");
-    const totalEl = document.getElementById("totalVisitors");
-
-    if (!todayEl || !totalEl) return;
-
-    const KEY = "hello_world_tv_last_counted_at";
-    const ONE_DAY = 24 * 60 * 60 * 1000;
-
-    const lastCounted = Number(localStorage.getItem(KEY) || 0);
-    const now = Date.now();
-    const shouldCount = !lastCounted || now - lastCounted >= ONE_DAY;
-
-    try {
-      const res = await fetch(
-        `/.netlify/functions/view-counter?count=${shouldCount ? "1" : "0"}`,
-      );
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.details || "Counter error");
-      }
-
-      if (shouldCount) {
-        localStorage.setItem(KEY, String(now));
-      }
-
-      todayEl.textContent = Number(data.today || 0).toLocaleString();
-      totalEl.textContent = Number(data.total || 0).toLocaleString();
-    } catch (err) {
-      console.error("Visitor counter error:", err);
-      todayEl.textContent = "N/A";
-      totalEl.textContent = "N/A";
-    }
-  }
-
   searchInput.addEventListener("input", renderChannels);
 
   renderCategories();
   renderChannels();
-  loadVisitorStats();
 
   console.log("Hello World TV loaded:", channels.length, "channels");
 });
+
+// Cloudflare visitor counter
 async function loadVisitorCount() {
+  const todayEl = document.getElementById("todayVisitors");
+  const totalEl = document.getElementById("totalVisitors");
+
+  if (!todayEl || !totalEl) return;
+
+  todayEl.textContent = "—";
+  totalEl.textContent = "—";
+
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
+  const STORAGE_KEY = "hello_world_tv_counted_date";
+  const lastCountedDate = localStorage.getItem(STORAGE_KEY);
+
+  const shouldCount = lastCountedDate !== today;
+
   try {
-    const res = await fetch("/api/views");
+    const res = await fetch(`/api/views?count=${shouldCount ? "1" : "0"}`, {
+      cache: "no-store",
+    });
+
     const data = await res.json();
 
-    if (data.error) {
-      console.error(data.error);
-      return;
+    if (!res.ok || data.error) {
+      throw new Error(data.error || "Counter error");
     }
 
-    document.getElementById("todayVisitors").textContent = data.today;
-    document.getElementById("totalVisitors").textContent = data.total;
+    if (shouldCount) {
+      localStorage.setItem(STORAGE_KEY, today);
+    }
+
+    todayEl.textContent = Number(data.today || 0).toLocaleString();
+    totalEl.textContent = Number(data.total || 0).toLocaleString();
   } catch (error) {
     console.error("Visitor counter error:", error);
+    todayEl.textContent = "—";
+    totalEl.textContent = "—";
   }
 }
 
