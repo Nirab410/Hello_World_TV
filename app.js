@@ -6,11 +6,24 @@ const channels = [
     name: "FIFA Plus",
     category: "Sports",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
+    url: "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/0854b57c-3d26-4f0d-b010-f4800b7d9dd1/1.m3u8",
+  },
+  {
+    name: "FIFA Plus EN",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
     url: "https://37b4c228.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWZyX0ZJRkFQbHVzRnJlbmNoX0hMUw/6f5437c5-e015-4754-8476-c8c6d27d3a55/1.m3u8",
   },
   {
     name: "BTV",
     category: "bangladeshi",
+    logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
+    url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
+    
+  },
+  {
+    name: "BTV HD",
+    category: "Bangladeshi",
     logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
     url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
   },
@@ -142,15 +155,15 @@ const channels = [
   },
   {
     name: "Jago News 24",
-    category: "news",
+    category: "Bangladeshi",
     logo: "https://i.ibb.co.com/KpRt3cT5/Jago-News-24.png",
     url: "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8?nimblesessionid=1048712240",
   },
   {
     name: "Jamuna TV",
-    category: "news",
+    category: "Bangladeshi",
     logo: "https://www.jamuna.tv/uploads/settings/default_img_1.jpg",
-    url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8",
+    url: "https://tvsen6.aynaott.com/jamunatv/tracks-v1a1/mono.ts.m3u8?e=1779283771&token=2592d440f00d65738bd7f6c5158ce486&u=78be6644-0a65-48ec-81a4-089ac65a2619",
   },
   {
     name: "DBC News",
@@ -273,6 +286,18 @@ const channels = [
     url: "https://tvsen7.aynaott.com/sspts1/tracks-v1a1/mono.ts.m3u8",
   },
   {
+    name: "Star Sports 2 HD",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
+    url: "https://flussonic.deltainfonet.com/08_STAR-SPORTS_2/tracks-v1a1/mono.m3u8",
+  },
+  {
+    name: "Star Sports 3 HD",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
+    url: "https://flussonic.deltainfonet.com/09_STAR-SPORTS_3/tracks-v1a1/mono.m3u8",
+  },
+  {
     name: "Gopal Var TV",
     category: "Cartoon",
     logo: "https://i.ibb.co.com/5xSF5mzh/Gopal-Bhar-animated-TV-series-title-card.jpg",
@@ -308,6 +333,42 @@ const channels = [
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
     type: "iframe",
     url: "https://jkndasijn.work.gd/embed.php?id=9101004880",
+  },
+  {
+    name: "TSN 1",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/k6sK73f3/tsn-1-logo-png-seeklogo-314693.png",
+    url: "https://tvsen7.aynaott.com/tsn1/index.m3u8",
+  },
+  {
+    name: "TSN 2",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/Xxw28Yn6/Start-TV-Channel-Logos-The-Sports-Network2.webp",
+    url: "https://tvsen7.aynaott.com/tsn2/index.m3u8",
+  },
+  {
+    name: "TSN 3",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/j9vBBzGV/tsn-3-logo-png-seeklogo-314924.png",
+    url: "https://tvsen7.aynaott.com/tsn3/index.m3u8",
+  },
+  {
+    name: "beIN Sports Extra",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
+    url: "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8",
+  },
+  {
+    name: "PTV Sports",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/Fkt4G6bK/PTV-Logo.png",
+    url: "https://tvsen5.aynaott.com/PtvSports/index.m3u8?e=1780236743&u=78be6644-0a65-48ec-81a4-089ac65a2619&token=76f74dfc4bdff676d7ce6ad4070d1761",
+  },
+  {
+    name: "Fox Sports 2",
+    category: "Sports",
+    logo: "https://i.ibb.co.com/dwjrPHy9/FS2-logo-2015-svg.png",
+    url: "https://tvsen7.aynaott.com/foxsports2/tracks-v1/mono.ts.m3u8?e=1779283790",
   },
 ];
 
