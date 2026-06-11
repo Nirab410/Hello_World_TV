@@ -19,7 +19,6 @@ const channels = [
     category: "bangladeshi",
     logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
     url: "https://owrcovcrpy.gpcdn.net/bpk-tv/1709/output/index.m3u8",
-    
   },
   {
     name: "BTV HD",
@@ -229,7 +228,7 @@ const channels = [
     name: "T Sports HD",
     category: "sports",
     logo: "https://i.ibb.co.com/mrvT7b6G/T-Sports-HD.png",
-    url: "https://tvsen7.aynaott.com/tsports-hd/tracks-v1a1/mono.ts.m3u8",
+    url: "https://amitomar.bdixbd.net/hoichoi.pro1/tracks-v1a1/index.m3u8",
   },
   {
     name: "Goal TV HD",
