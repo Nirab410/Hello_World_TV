@@ -328,10 +328,10 @@ const channels = [
   },
   {
     name: "Koora City",
-    category: "Sports",
+    category: "Live",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
     type: "iframe",
-    url: "https://jkndasijn.work.gd/embed.php?id=9101004880",
+    url: "https://live.kooran1.cfd/live1/index.m3u8",
   },
   {
     name: "TSN 1",
