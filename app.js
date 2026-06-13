@@ -372,7 +372,7 @@ const channels = [
     name: "Fifa Live",
     category: "Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_2500000=10004-mp4a_96000=20002.m3u8",
+    url: "https://raw.githubusercontent.com/abodnm9uyre/syria-tv/refs/heads/main/fe2Afy.m3u8",
   },
   {
     name: "Win TV",
@@ -386,6 +386,12 @@ const channels = [
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
     type: "iframe",
     url: "https://live.kooran1.cfd/live1/index.m3u8",
+  },
+  {
+    name: "DAZN",
+    category: "Live",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=DAZN",
+    url: "https://1nyaler.streamhostingcdn.top/stream/94/index.m3u8",
   },
 ];
 
