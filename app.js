@@ -355,7 +355,7 @@ const channels = [
     name: "beIN Sports Extra",
     category: "Sports",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
-    url: "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8",
+    url: "https://cdn.yallashooot.pp.ua/hls/ch1-2978.ts",
   },
   {
     name: "PTV Sports",
@@ -364,10 +364,28 @@ const channels = [
     url: "https://tvsen5.aynaott.com/PtvSports/index.m3u8?e=1780236743&u=78be6644-0a65-48ec-81a4-089ac65a2619&token=76f74dfc4bdff676d7ce6ad4070d1761",
   },
   {
-    name: "Fox Sports 2",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/dwjrPHy9/FS2-logo-2015-svg.png",
-    url: "https://tvsen7.aynaott.com/foxsports2/tracks-v1/mono.ts.m3u8?e=1779283790",
+    name: "BeIN Sports 1",
+    category: "Live",
+    logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
+    url: "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
+  },
+  {
+    name: "BeIN Sports 3",
+    category: "Live",
+    logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
+    url: "https://andro.226503.xyz/checklist/androstreamlivebs3.m3u8",
+  },
+  {
+    name: "Fifa Live",
+    category: "Live",
+    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
+    url: "https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD-avc1_2500000=10004-mp4a_96000=20002.m3u8",
+  },
+  {
+    name: "Win TV",
+    category: "Live",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Win+TV",
+    url: "https://1nyaler.streamhostingcdn.top/stream/32/index.m3u8",
   },
 ];
 
