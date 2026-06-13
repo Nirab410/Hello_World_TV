@@ -327,13 +327,6 @@ const channels = [
     url: "https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
   },
   {
-    name: "Koora City",
-    category: "Live",
-    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
-    type: "iframe",
-    url: "https://live.kooran1.cfd/live1/index.m3u8",
-  },
-  {
     name: "TSN 1",
     category: "Sports",
     logo: "https://i.ibb.co.com/k6sK73f3/tsn-1-logo-png-seeklogo-314693.png",
@@ -386,6 +379,13 @@ const channels = [
     category: "Live",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Win+TV",
     url: "https://1nyaler.streamhostingcdn.top/stream/32/index.m3u8",
+  },
+  {
+    name: "Koora City",
+    category: "Live",
+    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
+    type: "iframe",
+    url: "https://live.kooran1.cfd/live1/index.m3u8",
   },
 ];
 
