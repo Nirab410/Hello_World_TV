@@ -6,7 +6,7 @@ const channels = [
     name: "FIFA Plus",
     category: "Sports",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/0854b57c-3d26-4f0d-b010-f4800b7d9dd1/1.m3u8",
+    url: "https://live.kooran53.cfd/goolato3_720/index.m3u8",
   },
   {
     name: "FIFA Plus EN",
