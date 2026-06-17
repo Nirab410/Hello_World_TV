@@ -385,7 +385,7 @@ const channels = [
     category: "Live",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
     type: "iframe",
-    url: "https://live.kooran1.cfd/live1/index.m3u8",
+    url: "https://live.kooran51.cfd/yorrr1/index.m3u8",
   },
   {
     name: "DAZN",
