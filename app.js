@@ -316,7 +316,7 @@ const channels = [
   },
   {
     name: "Win TV",
-    category: "Live",
+    category: "Fifa Live",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Win+TV",
     url: "https://1nyaler.streamhostingcdn.top/stream/32/index.m3u8",
   },
