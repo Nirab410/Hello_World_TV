@@ -3,18 +3,6 @@
 
 const channels = [
   {
-    name: "FIFA Plus",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://live.kooran53.cfd/goolato3_720/index.m3u8",
-  },
-  {
-    name: "FIFA Plus EN",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://37b4c228.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWZyX0ZJRkFQbHVzRnJlbmNoX0hMUw/6f5437c5-e015-4754-8476-c8c6d27d3a55/1.m3u8",
-  },
-  {
     name: "BTV",
     category: "bangladeshi",
     logo: "https://i.ibb.co.com/TXNCpCP/Btv-National.png",
@@ -231,12 +219,6 @@ const channels = [
     url: "https://amitomar.bdixbd.net/hoichoi.pro1/tracks-v1a1/index.m3u8",
   },
   {
-    name: "Goal TV HD",
-    category: "sports",
-    logo: "https://i.ibb.co.com/q3LbbSx1/goal-212.png",
-    url: "https://streams2.sofast.tv/sofast/goaltv/goaltv_3500k.m3u8",
-  },
-  {
     name: "Tom & Jerry TV",
     category: "Cartoon",
     logo: "//i.ibb.co.com/RTN2G7fG/png-transparent-tom-and-jerry-smiling-illustration-tom-cat-jerry-mouse-nibbles-tom-and-jerry-tom-and.png",
@@ -273,30 +255,6 @@ const channels = [
     url: "https://tvsen6.aynaott.com/asports/tracks-v1a1/mono.ts.m3u8?e=1779508653",
   },
   {
-    name: "Sports Grid",
-    category: "Sports",
-    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Sports+Grid",
-    url: "https://tvsen6.aynaott.com/SportsGrid/tracks-v1a1/mono.ts.m3u8?e=1779508653",
-  },
-  {
-    name: "Star Sports 1 HD",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
-    url: "https://tvsen7.aynaott.com/sspts1/tracks-v1a1/mono.ts.m3u8",
-  },
-  {
-    name: "Star Sports 2 HD",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
-    url: "https://flussonic.deltainfonet.com/08_STAR-SPORTS_2/tracks-v1a1/mono.m3u8",
-  },
-  {
-    name: "Star Sports 3 HD",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/SDBggqWH/png-transparent-star-sports-3-star-india-television-channel-sony-ten-nilesat-television-text-sport.png",
-    url: "https://flussonic.deltainfonet.com/09_STAR-SPORTS_3/tracks-v1a1/mono.m3u8",
-  },
-  {
     name: "Gopal Var TV",
     category: "Cartoon",
     logo: "https://i.ibb.co.com/5xSF5mzh/Gopal-Bhar-animated-TV-series-title-card.jpg",
@@ -327,24 +285,6 @@ const channels = [
     url: "https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8",
   },
   {
-    name: "TSN 1",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/k6sK73f3/tsn-1-logo-png-seeklogo-314693.png",
-    url: "https://tvsen7.aynaott.com/tsn1/index.m3u8",
-  },
-  {
-    name: "TSN 2",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/Xxw28Yn6/Start-TV-Channel-Logos-The-Sports-Network2.webp",
-    url: "https://tvsen7.aynaott.com/tsn2/index.m3u8",
-  },
-  {
-    name: "TSN 3",
-    category: "Sports",
-    logo: "https://i.ibb.co.com/j9vBBzGV/tsn-3-logo-png-seeklogo-314924.png",
-    url: "https://tvsen7.aynaott.com/tsn3/index.m3u8",
-  },
-  {
     name: "beIN Sports Extra",
     category: "Sports",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
@@ -358,21 +298,21 @@ const channels = [
   },
   {
     name: "BeIN Sports 1",
-    category: "Live",
+    category: " FifaLive",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
     url: "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
   },
   {
     name: "BeIN Sports 3",
-    category: "Live",
+    category: "Sports",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
     url: "https://andro.226503.xyz/checklist/androstreamlivebs3.m3u8",
   },
   {
     name: "Fifa Live",
-    category: "Live",
+    category: "Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://raw.githubusercontent.com/abodnm9uyre/syria-tv/refs/heads/main/fe2Afy.m3u8",
+    url: "https://daffodil.thelistener.pk/tele.m3u8",
   },
   {
     name: "Win TV",
@@ -381,17 +321,16 @@ const channels = [
     url: "https://1nyaler.streamhostingcdn.top/stream/32/index.m3u8",
   },
   {
-    name: "Koora City",
-    category: "Live",
-    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Koora+City",
-    type: "iframe",
-    url: "https://live.kooran51.cfd/yorrr1/index.m3u8",
-  },
-  {
     name: "DAZN",
-    category: "Live",
+    category: "Sports",
     logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=DAZN",
     url: "https://1nyaler.streamhostingcdn.top/stream/94/index.m3u8",
+  },
+   {
+    name: "Somoy TV Live",
+    category: "Fifa Live",
+    logo: "https://images.seeklogo.com/logo-png/53/1/somoy-tv-logo-png_seeklogo-536972.png",
+    url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8",
   },
 ];
 
