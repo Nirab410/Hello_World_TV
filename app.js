@@ -298,7 +298,7 @@ const channels = [
   },
   {
     name: "BeIN Sports 1",
-    category: " FifaLive",
+    category: " Fifa Live",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
     url: "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
   },
