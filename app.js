@@ -303,6 +303,12 @@ const channels = [
     url: "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
   },
   {
+    name: "TSN 4",
+    category: " Fifa Live",
+    logo: "https://i.ibb.co.com/1tgCCsDp/images-3.png",
+    url: "https://ataide0.nawapholengineering.co.th/tsn.m3u8",
+  },
+  {
     name: "BeIN Sports 3",
     category: "Sports",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
