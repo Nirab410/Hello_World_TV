@@ -303,10 +303,10 @@ const channels = [
     url: "https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",
   },
   {
-    name: "TSN 4",
+    name: "Koora City",
     category: " Fifa Live",
-    logo: "https://i.ibb.co.com/1tgCCsDp/images-3.png",
-    url: "https://ataide0.nawapholengineering.co.th/tsn.m3u8",
+    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
+    url: "https://wa.newzela.online/tooota1_720/index.m3u8",
   },
   {
     name: "BeIN Sports 3",
