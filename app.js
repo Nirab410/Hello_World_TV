@@ -297,6 +297,18 @@ const channels = [
     url: "https://tvsen5.aynaott.com/PtvSports/index.m3u8?e=1780236743&u=78be6644-0a65-48ec-81a4-089ac65a2619&token=76f74dfc4bdff676d7ce6ad4070d1761",
   },
   {
+    name: "T Sports Live",
+    category: "Fifa Live",
+    logo: "https://i.ibb.co.com/mrvT7b6G/T-Sports-HD.png",
+    url: "https://trs1.aynaott.com/tsports/tracks-v1a1/mono.ts.m3u8",
+  }
+  {
+    name: "Toffee Live",
+    category: "Fifa Live",
+    logo: "https://i.ibb.co.com/Z6Q1PN3c/gametiles-com-banglalink-toffee.jpg",
+    url: "https://sm-monirul.top/tof/live/toffee4/index.m3u8?nocache=1782146598612",
+  },
+  {
     name: "BeIN Sports 1",
     category: " Fifa Live",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
