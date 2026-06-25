@@ -301,7 +301,7 @@ const channels = [
     category: "Fifa Live",
     logo: "https://i.ibb.co.com/mrvT7b6G/T-Sports-HD.png",
     url: "https://trs1.aynaott.com/tsports/tracks-v1a1/mono.ts.m3u8",
-  }
+  },
   {
     name: "Toffee Live",
     category: "Fifa Live",
