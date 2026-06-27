@@ -297,10 +297,10 @@ const channels = [
     url: "https://tvsen5.aynaott.com/PtvSports/index.m3u8?e=1780236743&u=78be6644-0a65-48ec-81a4-089ac65a2619&token=76f74dfc4bdff676d7ce6ad4070d1761",
   },
   {
-    name: "T Sports Live",
-    category: "Fifa Live",
-    logo: "https://i.ibb.co.com/mrvT7b6G/T-Sports-HD.png",
-    url: "https://trs1.aynaott.com/tsports/tracks-v1a1/mono.ts.m3u8",
+    name: "Koora City",
+    category: " Fifa Live",
+    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
+    url: "https://ex.moorarts.xyz/diluoe1_720/index.m3u8",
   },
   {
     name: "Toffee Live",
@@ -313,12 +313,6 @@ const channels = [
     category: " Fifa Live",
     logo: "https://i.ibb.co.com/VpMNnbjf/XTRA-2.webp",
     url: "https://edge22.776740.ir.cdn.ir/hls2/sport.m3u8",
-  },
-  {
-    name: "Koora City",
-    category: " Fifa Live",
-    logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://wa.newzela.online/tooota1_720/index.m3u8",
   },
   {
     name: "BeIN Sports 3",
