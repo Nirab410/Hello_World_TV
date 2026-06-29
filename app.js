@@ -300,7 +300,7 @@ const channels = [
     name: "Koora City",
     category: " Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://ex.moorarts.xyz/diluoe1_720/index.m3u8",
+    url: "https://am.homom.store/braz1_720/index.m3u8",
   },
   {
     name: "Toffee Live",
