@@ -342,7 +342,7 @@ const channels = [
   name: "BTV Alt",
   category: "Fifa Live",
   logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=BTV",
-  url: "https://tv-proxy.yourname.workers.dev/?target=" + encodeURIComponent("http://180.94.28.28:8097//BTV/index.fmp4.m3u8?token=8e9616c21d1ce3454bb9171c3c68550574f121aa-12a55987e1a817f2a4c12b2cfa6c3b78-1776169971-1776166371&remote=no_check_ip"),
+  url: "https://tv-proxy.mdsiyamulnirab69.workers.dev/?target=" + encodeURIComponent("http://180.94.28.28:8097//BTV/index.fmp4.m3u8?token=8e9616c21d1ce3454bb9171c3c68550574f121aa-12a55987e1a817f2a4c12b2cfa6c3b78-1776169971-1776166371&remote=no_check_ip"),
 },
 ];
 
