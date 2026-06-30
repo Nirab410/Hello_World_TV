@@ -300,7 +300,7 @@ const channels = [
     name: "Koora City",
     category: " Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://am.homom.store/braz1_720/index.m3u8",
+    url: "https://cd.coorting.online/homee1_720/index.m3u8",
   },
   {
     name: "BeIN Sports 1",
@@ -318,7 +318,7 @@ const channels = [
     name: "Fifa Live",
     category: "Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://andro.226503.xyz/checklist/androstreamlivebs2.m3u8",
+    url: "https://pull.niues.live/live/stream-534219_lhd.m3u8?auth_key=1782784162-0-0-1c9a6e36993915c9c102448d5e7dfbb5",
   },
    {
     name: "Somoy TV Live",
