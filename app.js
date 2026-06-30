@@ -300,7 +300,8 @@ const channels = [
     name: "Koora City",
     category: " Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://cd.coorting.online/homee1_720/index.m3u8",
+    url: "https://uk.boodins.store/cooce2_720/index.m3u8",
+    
   },
   {
     name: "BeIN Sports 1",
