@@ -342,7 +342,7 @@ const channels = [
     name: "Somoy TV Live",
     category: "Fifa Live",
     logo: "https://images.seeklogo.com/logo-png/53/1/somoy-tv-logo-png_seeklogo-536972.png",
-    url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/chunks.m3u8",
+    url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8",
   },
 ];
 
