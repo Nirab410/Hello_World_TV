@@ -324,13 +324,7 @@ const channels = [
     name: "Fifa Live",
     category: "Fifa Live",
     logo: "https://i.ibb.co.com/vnbkF0r/fifa-world-cup-2026-logo-png-seeklogo-665644.png",
-    url: "https://daffodil.thelistener.pk/tele.m3u8",
-  },
-  {
-    name: "Win TV",
-    category: "Fifa Live",
-    logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=Win+TV",
-    url: "https://1nyaler.streamhostingcdn.top/stream/32/index.m3u8",
+    url: "https://andro.226503.xyz/checklist/androstreamlivebs2.m3u8",
   },
   {
     name: "DAZN",
@@ -344,6 +338,12 @@ const channels = [
     logo: "https://images.seeklogo.com/logo-png/53/1/somoy-tv-logo-png_seeklogo-536972.png",
     url: "https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8",
   },
+  {
+  name: "BTV Alt",
+  category: "Fifa Live",
+  logo: "https://via.placeholder.com/120x80/1a2236/eef2ff?text=BTV",
+  url: "https://tv-proxy.yourname.workers.dev/?target=" + encodeURIComponent("http://180.94.28.28:8097//BTV/index.fmp4.m3u8?token=8e9616c21d1ce3454bb9171c3c68550574f121aa-12a55987e1a817f2a4c12b2cfa6c3b78-1776169971-1776166371&remote=no_check_ip"),
+},
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
