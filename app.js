@@ -304,6 +304,12 @@ const channels = [
     
   },
   {
+    name: "T Sports HD",
+    category: "Fifa Live",
+    logo: "https://i.ibb.co.com/mrvT7b6G/T-Sports-HD.png",
+    url: "https://flussonic.deltainfonet.com/01_Tsports_HD/tracks-v1a1/mono.m3u8",
+  },
+  {
     name: "Somoy TV Live",
     category: "Fifa Live",
     logo: "https://images.seeklogo.com/logo-png/53/1/somoy-tv-logo-png_seeklogo-536972.png",
